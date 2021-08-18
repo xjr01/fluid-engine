@@ -21,6 +21,9 @@
     <ClInclude Include="Macros.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
