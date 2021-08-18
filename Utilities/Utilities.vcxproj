@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Macros.h" />
+    <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
