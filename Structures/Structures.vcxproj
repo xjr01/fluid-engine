@@ -142,13 +142,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Field.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="Surface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dummy.cpp" />
-    <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="Surface.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
