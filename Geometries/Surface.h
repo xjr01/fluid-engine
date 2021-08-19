@@ -16,7 +16,7 @@ public:
 	/* Whether the ray is intersecting the surface */
 	bool isIntersecting;
 	/* The distance between intersecting point and the ray origin point */
-	double t;
+	real t;
 	/* The intersecting point */
 	VectorDr point;
 	/* Normal vector at the intersecting point */
