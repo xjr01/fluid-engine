@@ -37,9 +37,9 @@ public:
 	/* Returns the closest point to otherPoint on the surface */
 	virtual VectorDr closestPoint(const VectorDr& otherPoint) const = 0;
 	/* Returns normal vector at the closest point */
-	VectorDr closestNormal(const VectorDr& otherPoint) const = 0;
+	virtual VectorDr closestNormal(const VectorDr& otherPoint) const = 0;
 	/* Returns the closest intersection info of ray and this surface */
-	virtual SurfaceRayIntersection<Dim> closestIntersection(const Ray<Dim>& ray) const;
+	SurfaceRayIntersection<Dim> closestIntersection(const Ray<Dim>& ray) const;
 	/* Calculates the closest intersection info of ray and this surface and stores to intersection */
 	virtual void getClosestIntersection(const Ray& ray, SurfaceRayIntersection<Dim>& intersection) const = 0;
 	/* Returns if ray intersects with this surface */
