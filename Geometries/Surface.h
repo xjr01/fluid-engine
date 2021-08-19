@@ -41,7 +41,7 @@ public:
 	/* Returns the closest intersection info of ray and this surface */
 	SurfaceRayIntersection<Dim> closestIntersection(const Ray<Dim>& ray) const;
 	/* Calculates the closest intersection info of ray and this surface and stores to intersection */
-	virtual void getClosestIntersection(const Ray& ray, SurfaceRayIntersection<Dim>& intersection) const = 0;
+	virtual void getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const = 0;
 	/* Returns if ray intersects with this surface */
 	bool intersects(const Ray<Dim>& ray) const;
 	/* Returns the closest distance between otherPoint and this surface */
