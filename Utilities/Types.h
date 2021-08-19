@@ -92,7 +92,7 @@ DECLARE_REAL_TYPE(double, d)
 	static_assert(2 <= Dim && Dim <= 3, "Dimension must be 2 or 3.");		\
 	using VectorDr = Vector<Dim, real>;										\
 	using VectorDi = Vector<Dim, int>;										\
-	using MatrixDr = Vector<Dim, real>;
+	using MatrixDr = Matrix<Dim, real>;
 
 using uchar = unsigned char;
 using ushort = unsigned short;
