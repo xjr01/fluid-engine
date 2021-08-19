@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Surface.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
