@@ -5,7 +5,7 @@
 _FLUID_ENGINE_BEGIN
 
 template <int Dim>
-class Sphere : public Surface {
+class Sphere : public Surface<Dim> {
 	DECLARE_DIM_TYPES(Dim)
 
 	VectorDr _center;
