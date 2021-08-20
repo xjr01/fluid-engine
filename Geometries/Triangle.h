@@ -2,7 +2,6 @@
 
 #include <array>
 #include "Surface.h"
-#include "Ray.h"
 
 _FLUID_ENGINE_BEGIN
 
