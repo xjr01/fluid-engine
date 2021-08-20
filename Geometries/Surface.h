@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Utilities/Types.h"
 #include "Ray.h"
 
 _FLUID_ENGINE_BEGIN

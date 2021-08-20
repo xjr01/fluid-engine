@@ -1,7 +1,6 @@
 #include <cstring>
 #include "Ray.h"
-#include "Utilities/Constants.h"
-#include "Utilities/MathFunctions.h"
+#include <Utilities/MathFunctions.h>
 
 _FLUID_ENGINE_BEGIN
 
@@ -13,7 +12,7 @@ inline Ray<Dim>::Ray(const VectorDr& origin, const VectorDr& direction) :
 		_direction = MathFunc::normalized(direction);
 	}
 	catch (const char* msg) {
-		if (!strcmp_s(msg, "Vector being normalized should not be zero!"))
+		if (!strcmp(msg, "Vector being normalized should not be zero!"))
 			throw "Direction vector cannot be zero!";
 		throw msg;
 	}
@@ -23,13 +22,17 @@ template<int Dim>
 void Ray<Dim>::setDirection(const VectorDr& newDirection)
 {
 	try {
-		_direction = MathFunc::normalized(direction);
+		_direction = MathFunc::normalized(newDirection);
 	}
 	catch (const char* msg) {
-		if (!strcmp_s(msg, "Vector being normalized should not be zero!"))
+		if (!strcmp(msg, "Vector being normalized should not be zero!"))
 			throw "Direction vector cannot be zero!";
 		throw msg;
 	}
+	return;
 }
+
+template class Ray<2>;
+template class Ray<3>;
 
 _FLUID_ENGINE_END

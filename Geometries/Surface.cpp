@@ -22,4 +22,7 @@ real Surface<Dim>::closestDistance(const VectorDr& otherPoint) const
 	return (otherPoint - closestPoint(otherPoint)).norm();
 }
 
+template class Surface<2>;
+template class Surface<3>;
+
 _FLUID_ENGINE_END

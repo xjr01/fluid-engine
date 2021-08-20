@@ -1,24 +1,13 @@
 #pragma once
 
 #include "Types.h"
-#include "Constants.h"
 
 _MATH_FUNC_BEGIN
 
-template <class VectorType>
-VectorType normalized(const VectorType& ths) {
-	real length = ths.norm();
-	if (length < eps)
-		throw "Vector being normalized should not be zero!";
-	return ths / length;
-}
+Vector<real, 2> normalized(const Vector<real, 2>& ths);
+Vector<real, 3> normalized(const Vector<real, 3>& ths);
 
-template <class VectorType>
-void normalize(VectorType& ths) {
-	if (length < eps)
-		throw "Vector being normalized should not be zero!";
-	ths /= length;
-	return;
-}
+void normalize(Vector<real, 2>& ths);
+void normalize(Vector<real, 3>& ths);
 
 _MATH_FUNC_END

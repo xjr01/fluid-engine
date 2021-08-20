@@ -1,12 +1,10 @@
 #include <cmath>
 #include <limits>
 #include "Sphere.h"
-#include "Utilities/Constants.h"
-#include "Utilities/MathFunctions.h"
+#include <Utilities/MathFunctions.h>
+#include <Utilities/Constants.h>
 
 _FLUID_ENGINE_BEGIN
-
-DECLARE_DIM_TYPES(Dim)
 
 template<int Dim>
 inline Sphere<Dim>::Sphere(const VectorDr& center, const real& radius) :
@@ -15,16 +13,16 @@ inline Sphere<Dim>::Sphere(const VectorDr& center, const real& radius) :
 }
 
 template<int Dim>
-VectorDr Sphere<Dim>::closestPoint(const VectorDr& otherPoint) const
+Sphere<Dim>::VectorDr Sphere<Dim>::closestPoint(const VectorDr& otherPoint) const
 {
 	return _center + _radius * closestNormal(otherPoint);
 }
 
 template<int Dim>
-VectorDr Sphere<Dim>::closestNormal(const VectorDr& otherPoint) const
+Sphere<Dim>::VectorDr Sphere<Dim>::closestNormal(const VectorDr& otherPoint) const
 {
 	VectorDr direction = otherPoint - _center;
-	if (direction.norm() < eps) return VectorDr(1, 0, 0);
+	if (direction.norm() < eps) return VectorDr::Unit(0);
 	return MathFunc::normalized(direction);
 }
 
@@ -33,7 +31,7 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 {
 	VectorDr r = ray.origin() - _center;
 	real b = (real)2 * r.dot(ray.direction()),
-		c = r.dot(r),
+		c = r.dot(r) - _radius * _radius,
 		delta = b * b - (real)4 * c; // a = 1;
 	if (delta < 0) intersection.isIntersecting = false;
 	else {
@@ -46,7 +44,7 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 	}
 	if (intersection.isIntersecting) {
 		intersection.point = ray.origin() + ray.direction() * intersection.t;
-		intersection.normal = MathFunc::normalized(intersection.point - _center);
+		intersection.normal = MathFunc::normalized(VectorDr(intersection.point - _center));
 	}
 	else {
 		intersection.t = (real)0;
@@ -54,5 +52,8 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 	}
 	return;
 }
+
+template class Sphere<2>;
+template class Sphere<3>;
 
 _FLUID_ENGINE_END
