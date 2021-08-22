@@ -55,7 +55,7 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 		intersection.normal = MathFunc::normalized<VectorDr>(intersection.point - _center);
 	}
 	else {
-		intersection.t = (real)0;
+		intersection.t = std::numeric_limits<real>::infinity();
 		intersection.point = intersection.normal = VectorDr::Zero();
 	}
 	return;
