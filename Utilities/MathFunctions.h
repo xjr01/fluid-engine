@@ -30,4 +30,6 @@ void normalize(VectorType& ths)
 	return;
 }
 
+real sqr(real x);
+
 _MATH_FUNC_END
