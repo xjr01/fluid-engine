@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ray.h"
+#include "BoundingBox.h"
 
 _FLUID_ENGINE_BEGIN
 
@@ -37,6 +38,8 @@ public:
 	virtual VectorDr closestPoint(const VectorDr& otherPoint) const = 0;
 	/* Returns normal vector at the closest point */
 	virtual VectorDr closestNormal(const VectorDr& otherPoint) const = 0;
+	/* Returns the smallest bounding box of the surface */
+	virtual BoundingBox<Dim> boundingBox() const = 0;
 	/* Returns the closest intersection info of ray and this surface */
 	SurfaceRayIntersection<Dim> closestIntersection(const Ray<Dim>& ray) const;
 	/* Calculates the closest intersection info of ray and this surface and stores to intersection */

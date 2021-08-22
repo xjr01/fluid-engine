@@ -39,6 +39,11 @@ public:
 
 	BoundingBox(const VectorDr& lowerCorner, const VectorDr& upperCorner);
 
+	const VectorDr& lowerCorner() const { return _lowerCorner; }
+	VectorDr& lowerCorner() { return _lowerCorner; }
+	const VectorDr& upperCorner() const { return _upperCorner; }
+	VectorDr& upperCorner() { return _upperCorner; }
+
 	/* Returns width of the box in given axis */
 	real width(int axis) const;
 
@@ -48,7 +53,7 @@ public:
 	bool contains(const VectorDr& point) const;
 
 	/* Returns true if the input ray is intersecting with this box */
-	bool intersects(const Ray& ray) const { return closestIntersection(ray).isIntersecting; }
+	bool intersects(const Ray<Dim>& ray) const { return closestIntersection(ray).isIntersecting; }
 	/* Returns the closest intersection info of ray and this surface */
 	BoundingBoxRayIntersection<Dim> closestIntersection(const Ray<Dim>& ray) const {
 		BoundingBoxRayIntersection<Dim> intersection;

@@ -26,6 +26,12 @@ Triangle<Dim>::VectorDr Triangle<Dim>::closestNormal(const VectorDr& otherPoint)
 }
 
 template<int Dim>
+BoundingBox<Dim> Triangle<Dim>::boundingBox() const
+{
+	return BoundingBox<Dim>();
+}
+
+template<int Dim>
 void Triangle<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
 {
 }

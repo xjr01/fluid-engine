@@ -9,7 +9,7 @@ inline Ray<Dim>::Ray(const VectorDr& origin, const VectorDr& direction) :
 	_origin(origin), _direction()
 {
 	try {
-		_direction = MathFunc::normalized(direction);
+		_direction = MathFunc::normalized<VectorDr>(direction);
 	}
 	catch (const char* msg) {
 		if (!strcmp(msg, "Vector being normalized should not be zero!"))
@@ -22,7 +22,7 @@ template<int Dim>
 void Ray<Dim>::setDirection(const VectorDr& newDirection)
 {
 	try {
-		_direction = MathFunc::normalized(newDirection);
+		_direction = MathFunc::normalized<VectorDr>(newDirection);
 	}
 	catch (const char* msg) {
 		if (!strcmp(msg, "Vector being normalized should not be zero!"))

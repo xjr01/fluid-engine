@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <limits>
+#include <ranges>
 #include "BoundingBox.h"
 #include "Ray.h"
 
@@ -20,7 +21,7 @@ real BoundingBox<Dim>::width(int axis) const
 template<int Dim>
 bool BoundingBox<Dim>::overlaps(const BoundingBox& otherBox) const
 {
-	return std::all_of(0, Dim, [&](int i) {
+	return std::ranges::all_of(std::views::iota(0, Dim), [&](int i) {
 		return _lowerCorner(i) <= otherBox._upperCorner(i) &&
 			_upperCorner(i) >= otherBox._lowerCorner(i);
 	});
@@ -29,7 +30,7 @@ bool BoundingBox<Dim>::overlaps(const BoundingBox& otherBox) const
 template<int Dim>
 bool BoundingBox<Dim>::contains(const VectorDr& point) const
 {
-	return std::all_of(0, Dim, [&](int i) {
+	return std::ranges::all_of(std::views::iota(0, Dim), [&](int i) {
 		return _lowerCorner(i) <= point(i) && point(i) <= _upperCorner(i);
 	});
 }
@@ -85,8 +86,8 @@ template<int Dim>
 void BoundingBox<Dim>::merge(const VectorDr& point)
 {
 	for (int i = 0; i < Dim; ++i) {
-		_lowerCorner(i) = min(_lowerCorner(i), point(i));
-		_upperCorner(i) = max(_upperCorner(i), point(i));
+		_lowerCorner(i) = std::min(_lowerCorner(i), point(i));
+		_upperCorner(i) = std::max(_upperCorner(i), point(i));
 	}
 	return;
 }
@@ -95,8 +96,8 @@ template<int Dim>
 void BoundingBox<Dim>::merge(const BoundingBox& otherBox)
 {
 	for (int i = 0; i < Dim; ++i) {
-		_lowerCorner(i) = min(_lowerCorner(i), otherBox._lowerCorner(i));
-		_upperCorner(i) = max(_upperCorner(i), otherBox._upperCorner(i));
+		_lowerCorner(i) = std::min(_lowerCorner(i), otherBox._lowerCorner(i));
+		_upperCorner(i) = std::max(_upperCorner(i), otherBox._upperCorner(i));
 	}
 	return;
 }
@@ -104,10 +105,8 @@ void BoundingBox<Dim>::merge(const BoundingBox& otherBox)
 template<int Dim>
 void BoundingBox<Dim>::expand(real delta)
 {
-	for (int i = 0; i < Dim; ++i) {
-		_lowerCorner(i) -= delta;
-		_upperCorner(i) += delta;
-	}
+	_lowerCorner -= delta * VectorDr::Ones();
+	_upperCorner += delta * VectorDr::Ones();
 	return;
 }
 
@@ -117,13 +116,13 @@ BoundingBox<Dim>::VectorDr BoundingBox<Dim>::clamped(const VectorDr& point) cons
 	VectorDr res = point;
 	for (int i = 0; i < Dim; ++i)
 		res(i) = std::min(std::max(res(i), _lowerCorner(i)), _upperCorner(i));
-	return VectorDr();
+	return res;
 }
 
 template<int Dim>
 bool BoundingBox<Dim>::isEmpty() const
 {
-	return std::any_of(0, Dim, [&](int i) {
+	return std::ranges::any_of(std::views::iota(0, Dim), [&](int i) {
 		return _lowerCorner(i) >= _upperCorner(i);
 	});
 }

@@ -22,6 +22,9 @@ real Surface<Dim>::closestDistance(const VectorDr& otherPoint) const
 	return (otherPoint - closestPoint(otherPoint)).norm();
 }
 
+template class SurfaceRayIntersection<2>;
+template class SurfaceRayIntersection<3>;
+
 template class Surface<2>;
 template class Surface<3>;
 

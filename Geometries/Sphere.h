@@ -15,6 +15,7 @@ public:
 
 	virtual VectorDr closestPoint(const VectorDr& otherPoint) const override;
 	virtual VectorDr closestNormal(const VectorDr& otherPoint) const override;
+	virtual BoundingBox<Dim> boundingBox() const override;
 	virtual void getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const override;
 };
 

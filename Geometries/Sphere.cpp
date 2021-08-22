@@ -27,6 +27,14 @@ Sphere<Dim>::VectorDr Sphere<Dim>::closestNormal(const VectorDr& otherPoint) con
 }
 
 template<int Dim>
+BoundingBox<Dim> Sphere<Dim>::boundingBox() const
+{
+	return BoundingBox<Dim>(
+		_center - _radius * VectorDr::Ones(),
+		_center + _radius * VectorDr::Ones());
+}
+
+template<int Dim>
 void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
 {
 	VectorDr r = ray.origin() - _center;
@@ -44,7 +52,7 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 	}
 	if (intersection.isIntersecting) {
 		intersection.point = ray.origin() + ray.direction() * intersection.t;
-		intersection.normal = MathFunc::normalized(VectorDr(intersection.point - _center));
+		intersection.normal = MathFunc::normalized<VectorDr>(intersection.point - _center);
 	}
 	else {
 		intersection.t = (real)0;
