@@ -3,6 +3,7 @@
 #include <Utilities/Types.h>
 #include <Geometries/Sphere.h>
 #include <Geometries/Ray.h>
+#include <Geometries/Box.h>
 
 std::ostream& operator << (std::ostream& os, const FluidEngine::Vector2d& vec) {
 	os << '(';
@@ -17,6 +18,11 @@ std::ostream& operator << (std::ostream& os, const FluidEngine::Vector3d& vec) {
 
 template <int Dim>
 std::ostream& operator << (std::ostream& os, const FluidEngine::BoundingBox<Dim>& box) {
+	os << '[' << box.lowerCorner() << ',' << box.upperCorner() << ']';
+	return os;
+}
+template <int Dim>
+std::ostream& operator << (std::ostream& os, const FluidEngine::Box<Dim>& box) {
 	os << '[' << box.lowerCorner() << ',' << box.upperCorner() << ']';
 	return os;
 }
@@ -54,6 +60,10 @@ int main() {
 	std::cout << "Merge: " << addingPoint << ' ' << addingBox << std::endl;
 	std::cout << "Clamped: " << sphereBounding.clamped(Vector2r(-9, .2)) << std::endl;
 	std::cout << "IsEmpty: " << sphereBounding.isEmpty() << ' ' << BoundingBox<3>(Vector3r(5, 9, 2), Vector3r(-2, 9, 1)).isEmpty() << std::endl;
+
+	Box<2> box(sphereBounding);
+	std::cout << "Closest point: " << box.closestPoint(Vector2r(2, 3)) << box.closestPoint(Vector2r(9, 8)) << std::endl;
+	std::cout << "Closest normal: " << box.closestNormal(Vector2r(2, 3)) << box.closestNormal(Vector2r(9, 8)) << std::endl;
 
 	return 0;
 }
