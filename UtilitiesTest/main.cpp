@@ -21,11 +21,6 @@ std::ostream& operator << (std::ostream& os, const FluidEngine::BoundingBox<Dim>
 	os << '[' << box.lowerCorner() << ',' << box.upperCorner() << ']';
 	return os;
 }
-template <int Dim>
-std::ostream& operator << (std::ostream& os, const FluidEngine::Box<Dim>& box) {
-	os << '[' << box.lowerCorner() << ',' << box.upperCorner() << ']';
-	return os;
-}
 
 int main() {
 	using namespace FluidEngine;
@@ -62,8 +57,14 @@ int main() {
 	std::cout << "IsEmpty: " << sphereBounding.isEmpty() << ' ' << BoundingBox<3>(Vector3r(5, 9, 2), Vector3r(-2, 9, 1)).isEmpty() << std::endl;
 
 	Box<2> box(sphereBounding);
+	Box<3> box3(Vector3r(-2, 3, 1), Vector3r(5, 9, 2));
 	std::cout << "Closest point: " << box.closestPoint(Vector2r(2, 3)) << box.closestPoint(Vector2r(9, 8)) << std::endl;
 	std::cout << "Closest normal: " << box.closestNormal(Vector2r(2, 3)) << box.closestNormal(Vector2r(9, 8)) << std::endl;
+	std::cout << "Intersects: " << box.intersects(ray);
+	auto boxIntersection = box.closestIntersection(ray);
+	std::cout << ' ' << boxIntersection.t << ' ' << boxIntersection.point << ' ' << boxIntersection.normal << std::endl;
+	std::cout << "Closest point 3d: " << box3.closestPoint(Vector3r(2, 3, 4)) << box3.closestPoint(Vector3r(9, 8, 7)) << std::endl;
+	std::cout << "Closest normal 3d: " << box3.closestNormal(Vector3r(2, 3, 4)) << box3.closestNormal(Vector3r(9, 8, 7)) << std::endl;
 
 	return 0;
 }

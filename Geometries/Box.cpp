@@ -10,6 +10,12 @@ inline Box<Dim>::Box(const BoundingBox<Dim>& bound) : _bound(bound)
 }
 
 template<int Dim>
+Box<Dim>::Box(const VectorDr& lowerCorner, const VectorDr& upperCorner) :
+	_bound(lowerCorner, upperCorner)
+{
+}
+
+template<int Dim>
 Box<Dim>::VectorDr Box<Dim>::closestPoint(const VectorDr& otherPoint) const
 {
 	constexpr uint dimAll = 1 << Dim;

@@ -12,6 +12,7 @@ class Box : public Surface<Dim> {
 	BoundingBox<Dim> _bound;
 public:
 	explicit Box(const BoundingBox<Dim>& bound);
+	Box(const VectorDr& lowerCorner, const VectorDr& upperCorner);
 
 	virtual VectorDr closestPoint(const VectorDr& otherPoint) const override;
 	virtual VectorDr closestNormal(const VectorDr& otherPoint) const override;
