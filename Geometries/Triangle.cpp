@@ -6,7 +6,7 @@ template<int Dim>
 inline Triangle<Dim>::Triangle(
 	const std::array<VectorDr, 3>& points,
 	const std::array<VectorDr, 3>& normals,
-	const std::array<VectorDr, 3>& uvs) :
+	const std::array<Vector2r, 3>& uvs) :
 	_points(points),
 	_normals(normals),
 	_uvs(uvs)

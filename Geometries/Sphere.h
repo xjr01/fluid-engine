@@ -13,6 +13,11 @@ class Sphere : public Surface<Dim> {
 public:
 	Sphere(const VectorDr& center, const real& radius);
 
+	const VectorDr& center() const { return _center; }
+	VectorDr& center() { return _center; }
+	const real& radius() const { return _radius; }
+	real& radius() { return _radius; }
+
 	virtual VectorDr closestPoint(const VectorDr& otherPoint) const override;
 	virtual VectorDr closestNormal(const VectorDr& otherPoint) const override;
 	virtual BoundingBox<Dim> boundingBox() const override;
