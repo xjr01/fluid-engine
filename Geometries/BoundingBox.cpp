@@ -10,6 +10,9 @@ template<int Dim>
 inline BoundingBox<Dim>::BoundingBox(const VectorDr& lowerCorner, const VectorDr& upperCorner) :
 	_lowerCorner(lowerCorner), _upperCorner(upperCorner)
 {
+	for (int i = 0; i < Dim; ++i)
+		if (_lowerCorner(i) > _upperCorner(i))
+			std::swap(_lowerCorner(i), _upperCorner(i));
 }
 
 template<int Dim>

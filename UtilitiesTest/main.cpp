@@ -54,7 +54,8 @@ int main() {
 	addingBox.merge(BoundingBox<2>(Vector2r(-5, 0), Vector2r(-3, 20)));
 	std::cout << "Merge: " << addingPoint << ' ' << addingBox << std::endl;
 	std::cout << "Clamped: " << sphereBounding.clamped(Vector2r(-9, .2)) << std::endl;
-	std::cout << "IsEmpty: " << sphereBounding.isEmpty() << ' ' << BoundingBox<3>(Vector3r(5, 9, 2), Vector3r(-2, 9, 1)).isEmpty() << std::endl;
+	std::cout << "IsEmpty: " << sphereBounding.isEmpty() << ' ' << BoundingBox<3>(Vector3r(-2, 9, 2), Vector3r(5, 9, 1)).isEmpty() << std::endl;
+	std::cout << BoundingBox<3>(Vector3r(-2, 9, 2), Vector3r(5, 9, 1)) << std::endl;
 
 	Box<2> box(sphereBounding);
 	Box<3> box3(Vector3r(-2, 3, 1), Vector3r(5, 9, 2));
