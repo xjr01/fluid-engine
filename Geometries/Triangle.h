@@ -7,6 +7,7 @@ _FLUID_ENGINE_BEGIN
 
 template <int Dim>
 class Triangle : public Surface<Dim> {
+	static_assert(Dim == 3, "Dimension of Triangle must be 3");
 	DECLARE_DIM_TYPES(Dim)
 
 	std::array<VectorDr, 3> _points;
