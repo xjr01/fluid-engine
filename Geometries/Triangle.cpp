@@ -36,7 +36,6 @@ void Triangle<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayInters
 {
 }
 
-template class Triangle<2>;
 template class Triangle<3>;
 
 _FLUID_ENGINE_END
