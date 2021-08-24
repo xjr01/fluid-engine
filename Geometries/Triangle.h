@@ -7,7 +7,7 @@ _FLUID_ENGINE_BEGIN
 
 template <int Dim>
 class Triangle : public Surface<Dim> {
-	static_assert(Dim == 3, "Dimension of Triangle must be 3");
+	static_assert(Dim == 3, "Dimension of Triangle must be 3.");
 	DECLARE_DIM_TYPES(Dim)
 
 	/*
@@ -26,9 +26,9 @@ public:
 		const std::array<VectorDr, 3>& normals,
 		const std::array<Vector2r, 3>& uvs);
 
-	const std::array<VectorDr, 3>& points() const { return _points; }
-	const std::array<VectorDr, 3>& normals() const { return _normals; }
-	const std::array<Vector2r, 3>& uvs() const { return _uvs; }
+	const VectorDr& points(int i) const { return _points[i]; }
+	const VectorDr& normals(int i) const { return _normals[i]; }
+	const Vector2r& uvs(int i) const { return _uvs[i]; }
 
 	/* Returns the face normal of this triagle */
 	VectorDr faceNormal() const;
