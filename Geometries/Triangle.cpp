@@ -58,13 +58,21 @@ Triangle<Dim>::VectorDr Triangle<Dim>::closestPoint(const VectorDr& otherPoint) 
 	real signedDistanceToPlane = (otherPoint - _points[0]).dot(normal);
 	VectorDr projectedPoint = otherPoint - signedDistanceToPlane * normal;
 
-	if ((_points[1] - _points[0]).cross(projectedPoint - _points[0]).dot(normal) < 0)
+	VectorDr q01 = (_points[1] - _points[0]).cross(projectedPoint - _points[0]);
+	if (q01.dot(normal) < 0)
 		return closestPointOnEdge(_points[0], _points[1], otherPoint);
-	if ((_points[2] - _points[1]).cross(projectedPoint - _points[1]).dot(normal) < 0)
+	VectorDr q12 = (_points[2] - _points[1]).cross(projectedPoint - _points[1]);
+	if (q12.dot(normal) < 0)
 		return closestPointOnEdge(_points[1], _points[2], otherPoint);
-	if ((_points[0] - _points[2]).cross(projectedPoint - _points[2]).dot(normal) < 0)
+	VectorDr q20 = (_points[0] - _points[2]).cross(projectedPoint - _points[2]);
+	if (q20.dot(normal) < 0)
 		return closestPointOnEdge(_points[2], _points[0], otherPoint);
-	return projectedPoint;
+
+	real sum = area(),
+		b01 = (real).5 * q01.norm() / sum,
+		b12 = (real).5 * q12.norm() / sum,
+		b20 = (real).5 * q20.norm() / sum;
+	return b12 * _points[0] + b20 * _points[1] + b01 * _points[2];
 }
 
 template<int Dim>
@@ -74,13 +82,21 @@ Triangle<Dim>::VectorDr Triangle<Dim>::closestNormal(const VectorDr& otherPoint)
 	real signedDistanceToPlane = (otherPoint - _points[0]).dot(normal);
 	VectorDr projectedPoint = otherPoint - signedDistanceToPlane * normal;
 
-	if ((_points[1] - _points[0]).cross(projectedPoint - _points[0]).dot(normal) < 0)
+	VectorDr q01 = (_points[1] - _points[0]).cross(projectedPoint - _points[0]);
+	if (q01.dot(normal) < 0)
 		return closestNormalOnEdge(_points[0], _points[1], _normals[0], _normals[1], otherPoint);
-	if ((_points[2] - _points[1]).cross(projectedPoint - _points[1]).dot(normal) < 0)
+	VectorDr q12 = (_points[2] - _points[1]).cross(projectedPoint - _points[1]);
+	if (q12.dot(normal) < 0)
 		return closestNormalOnEdge(_points[1], _points[2], _normals[1], _normals[2], otherPoint);
-	if ((_points[0] - _points[2]).cross(projectedPoint - _points[2]).dot(normal) < 0)
+	VectorDr q20 = (_points[0] - _points[2]).cross(projectedPoint - _points[2]);
+	if (q20.dot(normal) < 0)
 		return closestNormalOnEdge(_points[2], _points[0], _normals[2], _normals[0], otherPoint);
-	return normal;
+
+	real sum = area(),
+		b01 = (real).5 * q01.norm() / sum,
+		b12 = (real).5 * q12.norm() / sum,
+		b20 = (real).5 * q20.norm() / sum;
+	return MathFunc::normalized<VectorDr>(b12 * _normals[0] + b20 * _normals[1] + b01 * _normals[2]);
 }
 
 template<int Dim>
@@ -94,6 +110,37 @@ BoundingBox<Dim> Triangle<Dim>::boundingBox() const
 template<int Dim>
 void Triangle<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
 {
+	VectorDr normal = faceNormal();
+	real nd = normal.dot(ray.direction());
+
+	intersection.isIntersecting = true;
+
+	if (nd < eps) intersection.isIntersecting = false; // parallel
+	intersection.t = (_points[0] - ray.origin()).dot(normal) / nd;
+	intersection.point = ray.origin() + intersection.t * ray.direction();
+
+	VectorDr q01 = (_points[1] - _points[0]).cross(intersection.point - _points[0]);
+	if (q01.dot(normal) < 0)
+		intersection.isIntersecting = false;
+	VectorDr q12 = (_points[2] - _points[1]).cross(intersection.point - _points[1]);
+	if (q12.dot(normal) < 0)
+		intersection.isIntersecting = false;
+	VectorDr q20 = (_points[0] - _points[2]).cross(intersection.point - _points[2]);
+	if (q20.dot(normal) < 0)
+		intersection.isIntersecting = false;
+
+	if (intersection.isIntersecting) {
+		real sum = area(),
+			b01 = (real).5 * q01.norm() / sum,
+			b12 = (real).5 * q12.norm() / sum,
+			b20 = (real).5 * q20.norm() / sum;
+		intersection.normal = MathFunc::normalized<VectorDr>(b12 * _normals[0] + b20 * _normals[1] + b01 * _normals[2]);
+	}
+	else {
+		intersection.t = std::numeric_limits<real>::infinity();
+		intersection.point = intersection.normal = VectorDr::Zero();
+	}
+	return;
 }
 
 template<int Dim>

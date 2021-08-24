@@ -1,9 +1,11 @@
 #include <iostream>
 #include <numeric>
+#include <array>
 #include <Utilities/Types.h>
 #include <Geometries/Sphere.h>
 #include <Geometries/Ray.h>
 #include <Geometries/Box.h>
+#include <Geometries/Triangle.h>
 
 std::ostream& operator << (std::ostream& os, const FluidEngine::Vector2d& vec) {
 	os << '(';
@@ -66,6 +68,15 @@ int main() {
 	std::cout << ' ' << boxIntersection.t << ' ' << boxIntersection.point << ' ' << boxIntersection.normal << std::endl;
 	std::cout << "Closest point 3d: " << box3.closestPoint(Vector3r(2, 3, 4)) << box3.closestPoint(Vector3r(9, 8, 7)) << std::endl;
 	std::cout << "Closest normal 3d: " << box3.closestNormal(Vector3r(2, 3, 4)) << box3.closestNormal(Vector3r(9, 8, 7)) << std::endl;
+
+	Triangle<3> triangle(std::array<Vector3d, 3>{ Vector3d(0, 0, 0), Vector3d(5, 0, 0), Vector3d(1, 2, 0) },
+		std::array<Vector3d, 3>{ Vector3d(-1, -1, 2), Vector3d(1, 1, 2), Vector3d(0, 0, 1) },
+		std::array<Vector2d, 3>{ Vector2d::Zero(), Vector2d::Zero(), Vector2d::Zero() });
+	std::cout << "Closest point: " << triangle.closestPoint(Vector3r(0, 2, 2)) << triangle.closestPoint(Vector3r(1, 1, 2)) << std::endl;
+	std::cout << "Closest normal: " << triangle.closestNormal(Vector3r(0, 2, 2)) << triangle.closestNormal(Vector3r(1, 1, 2)) << std::endl;
+	auto intersection3 = triangle.closestIntersection(Ray<3>(Vector3d(0, 0, -1), Vector3d(1, 1, 1)));
+	std::cout << intersection3.isIntersecting << " | "
+		<< intersection3.point << " " << intersection3.normal << std::endl;
 
 	return 0;
 }
