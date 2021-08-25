@@ -61,7 +61,47 @@ void Sphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersec
 	return;
 }
 
+template<int Dim>
+inline ImplicitSphere<Dim>::ImplicitSphere(const VectorDr& center, const real& radius) :
+	_sphere(center, radius)
+{
+}
+
+template<int Dim>
+ImplicitSphere<Dim>::VectorDr ImplicitSphere<Dim>::closestPoint(const VectorDr& otherPoint) const
+{
+	return otherPoint - signedDistance(otherPoint) * closestNormal(otherPoint);
+}
+
+template<int Dim>
+ImplicitSphere<Dim>::VectorDr ImplicitSphere<Dim>::closestNormal(const VectorDr& otherPoint) const
+{
+	return _sphere.closestNormal();
+}
+
+template<int Dim>
+BoundingBox<Dim> ImplicitSphere<Dim>::boundingBox() const
+{
+	return _sphere.boundingBox();
+}
+
+template<int Dim>
+void ImplicitSphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
+{
+	_sphere.getClosestIntersection(ray, intersection);
+	return;
+}
+
+template<int Dim>
+real ImplicitSphere<Dim>::signedDistance(const VectorDr& otherPoint) const
+{
+	return (otherPoint - center()).norm() - radius();
+}
+
 template class Sphere<2>;
 template class Sphere<3>;
+
+template class ImplicitSphere<2>;
+template class ImplicitSphere<3>;
 
 _FLUID_ENGINE_END
