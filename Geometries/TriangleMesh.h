@@ -8,7 +8,7 @@ _FLUID_ENGINE_BEGIN
 
 template <int Dim>
 class TriangleMesh : public Surface<Dim> {
-	static_assert(Dim == 3, "Dimension of TriangleMesh must be 3.")
+	static_assert(Dim == 3, "Dimension of TriangleMesh must be 3.");
 	DECLARE_DIM_TYPES(Dim)
 
 	std::vector<VectorDr> _points;

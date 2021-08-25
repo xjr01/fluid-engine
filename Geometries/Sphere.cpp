@@ -76,7 +76,7 @@ ImplicitSphere<Dim>::VectorDr ImplicitSphere<Dim>::closestPoint(const VectorDr& 
 template<int Dim>
 ImplicitSphere<Dim>::VectorDr ImplicitSphere<Dim>::closestNormal(const VectorDr& otherPoint) const
 {
-	return _sphere.closestNormal();
+	return _sphere.closestNormal(otherPoint);
 }
 
 template<int Dim>
