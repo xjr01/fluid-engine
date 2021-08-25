@@ -88,8 +88,7 @@ BoundingBox<Dim> ImplicitSphere<Dim>::boundingBox() const
 template<int Dim>
 void ImplicitSphere<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
 {
-	_sphere.getClosestIntersection(ray, intersection);
-	return;
+	return _sphere.getClosestIntersection(ray, intersection);
 }
 
 template<int Dim>
