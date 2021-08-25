@@ -47,7 +47,9 @@ public:
 	/* Returns if ray intersects with this surface */
 	bool intersects(const Ray<Dim>& ray) const;
 	/* Returns the closest distance between otherPoint and this surface */
-	real closestDistance(const VectorDr& otherPoint) const;
+	virtual real closestDistance(const VectorDr& otherPoint) const;
+	/* Returns true if otherPoint is inside the volumn defined by this surface */
+	virtual bool isInside(const VectorDr& otherPoint) const;
 };
 
 _FLUID_ENGINE_END

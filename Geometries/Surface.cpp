@@ -22,6 +22,12 @@ real Surface<Dim>::closestDistance(const VectorDr& otherPoint) const
 	return (otherPoint - closestPoint(otherPoint)).norm();
 }
 
+template<int Dim>
+bool Surface<Dim>::isInside(const VectorDr& otherPoint) const
+{
+	return (otherPoint - closestPoint(otherPoint)).dot(closestNormal(otherPoint)) < 0;
+}
+
 template class SurfaceRayIntersection<2>;
 template class SurfaceRayIntersection<3>;
 
