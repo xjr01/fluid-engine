@@ -52,4 +52,22 @@ public:
 	virtual bool isInside(const VectorDr& otherPoint) const;
 };
 
+/*
+* ImplicitSurface<Dim>
+*	an API for implicit surfaces
+*/
+template <int Dim>
+class ImplicitSurface : public Surface<Dim> {
+	DECLARE_DIM_TYPES(Dim)
+public:
+	ImplicitSurface() = default;
+	virtual ~ImplicitSurface() = default;
+
+	/* The signed distance function (SDF) */
+	virtual real signedDistance(const VectorDr& otherPoint) const = 0;
+
+	virtual real closestDistance(const VectorDr& otherPoint) const;
+	virtual bool isInside(const VectorDr& otherPoint) const;
+};
+
 _FLUID_ENGINE_END

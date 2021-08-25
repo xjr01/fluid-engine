@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Surface.h"
 
 _FLUID_ENGINE_BEGIN
@@ -28,10 +29,25 @@ bool Surface<Dim>::isInside(const VectorDr& otherPoint) const
 	return (otherPoint - closestPoint(otherPoint)).dot(closestNormal(otherPoint)) < 0;
 }
 
+template<int Dim>
+inline real ImplicitSurface<Dim>::closestDistance(const VectorDr& otherPoint) const
+{
+	return std::abs(signedDistance(otherPoint));
+}
+
+template<int Dim>
+bool ImplicitSurface<Dim>::isInside(const VectorDr& otherPoint) const
+{
+	return signedDistance(otherPoint) < 0;
+}
+
 template class SurfaceRayIntersection<2>;
 template class SurfaceRayIntersection<3>;
 
 template class Surface<2>;
 template class Surface<3>;
+
+template class ImplicitSurface<2>;
+template class ImplicitSurface<3>;
 
 _FLUID_ENGINE_END
