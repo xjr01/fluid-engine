@@ -1,4 +1,5 @@
 #include <limits>
+#include <ranges>
 #include "Box.h"
 #include <Utilities/MathFunctions.h>
 
@@ -116,7 +117,67 @@ void Box<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersectio
 	return;
 }
 
+template<int Dim>
+inline ImplicitBox<Dim>::ImplicitBox(const BoundingBox<Dim>& bound) :
+	_box(bound)
+{
+}
+
+template<int Dim>
+ImplicitBox<Dim>::ImplicitBox(const VectorDr& lowerCorner, const VectorDr& upperCorner) :
+	_box(lowerCorner, upperCorner)
+{
+}
+
+template<int Dim>
+ImplicitBox<Dim>::VectorDr ImplicitBox<Dim>::closestPoint(const VectorDr& otherPoint) const
+{
+	return _box.closestPoint(otherPoint);
+}
+
+template<int Dim>
+ImplicitBox<Dim>::VectorDr ImplicitBox<Dim>::closestNormal(const VectorDr& otherPoint) const
+{
+	return _box.closestNormal(otherPoint);
+}
+
+template<int Dim>
+BoundingBox<Dim> ImplicitBox<Dim>::boundingBox() const
+{
+	return _box.boundingBox();
+}
+
+template<int Dim>
+void ImplicitBox<Dim>::getClosestIntersection(const Ray<Dim>& ray, SurfaceRayIntersection<Dim>& intersection) const
+{
+	return _box.getClosestIntersection(ray, intersection);
+}
+
+template<int Dim>
+real ImplicitBox<Dim>::signedDistance(const VectorDr& otherPoint) const
+{
+	return (real)(isInside(otherPoint) ? -1 : 1) * closestDistance(otherPoint);
+}
+
+template<int Dim>
+real ImplicitBox<Dim>::closestDistance(const VectorDr& otherPoint) const
+{
+	return _box.closestDistance(otherPoint);
+}
+
+template<int Dim>
+bool ImplicitBox<Dim>::isInside(const VectorDr& otherPoint) const
+{
+	return std::ranges::all_of(std::views::iota(0, Dim), [&](int i) {
+		return _box.lowerCorner()(i) <= otherPoint(i) &&
+			otherPoint(i) <= _box.upperCorner()(i);
+	});
+}
+
 template class Box<2>;
 template class Box<3>;
+
+template class ImplicitBox<2>;
+template class ImplicitBox<3>;
 
 _FLUID_ENGINE_END
