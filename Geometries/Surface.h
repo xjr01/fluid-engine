@@ -66,8 +66,8 @@ public:
 	/* The signed distance function (SDF) */
 	virtual real signedDistance(const VectorDr& otherPoint) const = 0;
 
-	virtual real closestDistance(const VectorDr& otherPoint) const;
-	virtual bool isInside(const VectorDr& otherPoint) const;
+	virtual real closestDistance(const VectorDr& otherPoint) const override;
+	virtual bool isInside(const VectorDr& otherPoint) const override;
 };
 
 _FLUID_ENGINE_END
