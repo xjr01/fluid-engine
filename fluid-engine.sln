@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Structures", "Structures\St
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Geometries", "Geometries\Geometries.vcxproj", "{ACD0BD76-B273-4B82-8710-777769D53076}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animations", "Animations\Animations.vcxproj", "{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -57,6 +59,14 @@ Global
 		{ACD0BD76-B273-4B82-8710-777769D53076}.Release|x64.Build.0 = Release|x64
 		{ACD0BD76-B273-4B82-8710-777769D53076}.Release|x86.ActiveCfg = Release|Win32
 		{ACD0BD76-B273-4B82-8710-777769D53076}.Release|x86.Build.0 = Release|Win32
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Debug|x64.ActiveCfg = Debug|x64
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Debug|x64.Build.0 = Debug|x64
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Debug|x86.ActiveCfg = Debug|Win32
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Debug|x86.Build.0 = Debug|Win32
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Release|x64.ActiveCfg = Release|x64
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Release|x64.Build.0 = Release|x64
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Release|x86.ActiveCfg = Release|Win32
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +76,7 @@ Global
 		{907671C1-1A19-40F7-AF6B-5A2EA45F6419} = {FFF56C62-9680-4257-B1A4-61C8E96F8408}
 		{1424B363-C802-4424-8336-A6BB23AEDB76} = {14369929-A420-4C86-9065-6F3007D4AC07}
 		{ACD0BD76-B273-4B82-8710-777769D53076} = {14369929-A420-4C86-9065-6F3007D4AC07}
+		{6CC42175-3DFD-4102-B2CD-CA4AB6BA1918} = {14369929-A420-4C86-9065-6F3007D4AC07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CFD91DC-75A0-4397-A9C7-FD5DFEC9CAD6}
